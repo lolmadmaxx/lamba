@@ -57,28 +57,6 @@ make install
 make clean
 ```
 
-### Platform-Specific Details
-
-The Makefile automatically detects your platform:
-
-**On Windows:**
-- Creates `.dll` files (value.dll, mlp.dll)
-- Uses Windows style paths and copy commands
-- Generates import libraries (.dll.a files)
-
-**On Linux:**
-- Creates `.so` files (value.so, mlp.so)  
-- Uses Unix style paths and cp commands
-- Includes `-fPIC` flag for position-independent code
-
-**Example build output:**
-```bash
-# Windows
-gcc -c -O2 -Wall -Werror -std=c99 -o value.o value.c
-gcc -shared -o value.dll value.o -Wl,--out-implib,libvalue.dll.a
-copy value.dll ..\micrograd_c\lib\
-```
-
 ## As an Introduction
 
 ### Basic Value Operations
