@@ -4,7 +4,7 @@ A C implementation of automatic differentiation with a Python interface, inspire
 
 ## Installation & Setup
 
-**NOTE:** This project is developed for only Windows platforms. The Makefile automatically detects your operating system and uses the appropriate build commands.
+**NOTE:** This project is developed for only Windows platforms.
 
 ### Requirements
 - Python 3.7+
