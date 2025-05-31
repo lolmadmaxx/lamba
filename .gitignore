@@ -1,0 +1,37 @@
+test/
+test/*
+
+# Python cache directories
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Specific compiled files in src/
+src/*.o
+src/*.dll
+src/*.dll.a
+src/libmlp.dll.a
+src/libvalue.dll.a
+
+# Build directories
+build/
+dist/
+*.egg-info/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Virtual environments
+venv/
+env/
+.env
+
+# Temporary files
+*.tmp
+*.temp
