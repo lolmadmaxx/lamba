@@ -1,8 +1,8 @@
-# micrograd-c
+# lamba
 
 A C implementation of automatic differentiation with a Python interface, inspired by Andrej Karpathy's [micrograd](https://github.com/karpathy/micrograd). 
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 **NOTE:** This project is developed for both Windows and Linux platforms. The Makefile automatically detects your operating system and uses the appropriate build commands.
 
@@ -35,7 +35,7 @@ cd ..
 pip install -e .
 ```
 
-## 🔧 Building C Libraries
+## Building C Libraries
 
 The project includes C implementations for performance-critical operations. Use the provided Makefile to build the shared libraries:
 
