@@ -202,6 +202,22 @@ model = MLP(nin=3, layer_specs=layers)
 - `'random'`: Random uniform initialization [-1, 1]
 - `'zero'`: Zero initialization
 
+### Wave Packet Layers
+
+`WavePacketLayer` and `WavePacketMLP` provide Gaussian wave packet feature
+extraction for signal-like data. Each packet produces a sine and cosine component
+modulated by a Gaussian envelope. The outputs feed into a regular MLP.
+
+```python
+from micrograd_c import WavePacketMLP, Adam, Value
+
+model = WavePacketMLP(wave_packets=3, mlp_layers=[6, 1], seed=42)
+optimizer = Adam(model.parameters, lr=0.001)
+# forward: prediction = model.forward([Value(x)])
+```
+
+See `examples/nilm_wave_packet.py` for a full training script.
+
 ### Engine Class
 
 The `Engine` class provides training utilities and loss functions.
@@ -474,6 +490,19 @@ loaded_model = MLP.load_parameters('trained_model.json')
 print("Model saved and loaded successfully!")
 ```
 
+### NILM Wave Packet Example
+
+The repository includes a small example that trains a `WavePacketMLP`
+on synthetic non-intrusive load monitoring (NILM) data. Run the
+following commands to train and then perform inference:
+
+```bash
+python examples/nilm_wave_packet.py
+python examples/nilm_inference.py
+```
+
+This saves parameters that can be placed into
+`examples/esp32_inference.c` for deployment on an ESP32.
 
 ## C Implementation Details
 
