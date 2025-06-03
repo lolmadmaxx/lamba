@@ -409,8 +409,8 @@ class Engine:
             learning_rate: Learning rate for optimization
             batch_size: Batch size (if None, use full batch)
             loss_fn: Loss function (default: MSE)
-            validation_data: Optional (val_inputs, val_targets) tuple            verbose: Whether to print training progress
-            
+            validation_data: Optional (val_inputs, val_targets) tuple
+            verbose: Whether to print training progress
         Returns:
             Dictionary with training history
         """

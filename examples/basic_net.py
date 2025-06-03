@@ -316,7 +316,8 @@ def demo_advanced_features():
                 target = Value(float(target))
             
             error = pred - target
-            abs_error = error.abs() if hasattr(error, 'abs') else (error * error).sqrt()
+            # Compute absolute error using available operations
+            abs_error = (error * error).pow_safe(0.5)
             
             # Huber loss: quadratic for small errors, linear for large errors
             if abs_error.data <= delta:
