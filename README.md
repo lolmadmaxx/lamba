@@ -139,7 +139,7 @@ print(f"Final loss: {history['train_loss'][-1]:.6f}")
 
 ### Value Class
 
-As in Karpathy's micrograd, the names, classes and methods are mostly the left the same. The `Value` class is a scalar value with automatic differentiation capabilities.
+As in Karpathy's micrograd, the names, classes and methods are mostly left the same. The `Value` class is a scalar value with automatic differentiation capabilities.
 
 #### Key Methods:
 - `Value(data)`: Create a regular value

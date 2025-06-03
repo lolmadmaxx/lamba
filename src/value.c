@@ -16,6 +16,13 @@ static void backward_mul(Value *self) {
     self->right->grad += self->left->data  * self->grad;
 }
 
+static void backward_div(Value *self) {
+    float a = self->left->data;
+    float b = self->right->data;
+    self->left->grad  += (1.0f / b) * self->grad;
+    self->right->grad += (-a / (b * b)) * self->grad;
+}
+
 static void backward_pow(Value *self) {
     float e = self->_exponent;
     self->left->grad += e * powf(self->left->data, e - 1.0f) * self->grad;
@@ -129,8 +136,12 @@ VG_API Value* value_sub(Value *a, Value *b) {
 }
 
 VG_API Value* value_div(Value *a, Value *b) {
-    Value *inv_b = value_pow(b, -1.0f);
-    return value_mul(a, inv_b);
+    Value *z = value_new(a->data / b->data);
+    z->left     = a;
+    z->right    = b;
+    z->op        = '/';
+    z->backward  = backward_div;
+    return z;
 }
 
 VG_API Value* value_div_safe(Value *a, Value *b) {
@@ -141,7 +152,7 @@ VG_API Value* value_div_safe(Value *a, Value *b) {
         // Return a very large value instead of crashing
         return value_new(a->data > 0 ? 1e6f : -1e6f);
     }
-    return value_mul(a, value_pow(b, -1.0f));
+    return value_div(a, b);
 }
 
 VG_API Value* value_relu(Value *a) {
