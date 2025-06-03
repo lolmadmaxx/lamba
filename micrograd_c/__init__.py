@@ -1,7 +1,7 @@
 from .value import Value
 from .mlp import MLP, Layer
 from .engine import Engine, SGD, Adam, LangevinLandauOptimizer
-from .wavepacket import WavePacketLayer, WavePacketMLP
+from .wavepacket import WavePacketLayer, WavePacketMLP, TwoInputWavePacketMLP
 
 __version__ = "0.0.1"
 __author__ = "Mehmet Batuhan Duman"
@@ -44,4 +44,5 @@ __all__ = [
     "LangevinLandauOptimizer",
     "WavePacketLayer",
     "WavePacketMLP",
+    "TwoInputWavePacketMLP",
 ]

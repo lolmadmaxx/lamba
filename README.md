@@ -492,9 +492,11 @@ print("Model saved and loaded successfully!")
 
 ### NILM Wave Packet Example
 
-The repository includes a small example that trains a `WavePacketMLP`
-on synthetic non-intrusive load monitoring (NILM) data. Run the
-following commands to train and then perform inference:
+The repository includes an example that trains a two-input
+`TwoInputWavePacketMLP` on synthetic non-intrusive load monitoring
+(NILM) data. Each training sample represents a 120 minute window of
+measurements with two channels: ampere and watt. Run the following
+commands to train and then perform inference:
 
 ```bash
 python examples/nilm_wave_packet.py
@@ -502,7 +504,8 @@ python examples/nilm_inference.py
 ```
 
 This saves parameters that can be placed into
-`examples/esp32_inference.c` for deployment on an ESP32.
+`examples/esp32_inference.c` for deployment on an ESP32. A matching C
+training program can be found under `c_examples/nilm_train.c`.
 
 ## C Implementation Details
 

@@ -90,3 +90,39 @@ class WavePacketMLP:
 
     def parameter_count(self) -> int:
         return len(self.parameters)
+
+
+class TwoInputWavePacketMLP:
+    """Wave packet network for two scalar inputs (ampere and watt)."""
+
+    def __init__(self, packets_per_input: int, mlp_layers: List[int], seed: int | None = None):
+        self.wave_amp = WavePacketLayer(packets_per_input, input_dim=1, seed=seed)
+        # use different seed for second layer to avoid identical init when provided
+        self.wave_watt = WavePacketLayer(packets_per_input, input_dim=1, seed=None if seed is None else seed + 1)
+
+        mlp_in = 4 * packets_per_input  # two layers each output 2*num_packets features
+        self.mlp = MLP(nin=mlp_in, layer_specs=mlp_layers)
+        if seed is not None:
+            self.mlp.initialize_parameters(method='xavier', seed=seed)
+
+        self.parameters = (
+            self.wave_amp.parameters
+            + self.wave_watt.parameters
+            + self.mlp.parameters
+        )
+
+    def forward(self, inputs: List[Value]) -> List[Value]:
+        if len(inputs) != 2:
+            raise ValueError("Two inputs required: ampere and watt")
+
+        amp_feats = self.wave_amp.forward([inputs[0]])
+        watt_feats = self.wave_watt.forward([inputs[1]])
+        return self.mlp.forward(amp_feats + watt_feats)
+
+    def zero_grad(self) -> None:
+        self.wave_amp.zero_grad()
+        self.wave_watt.zero_grad()
+        self.mlp.zero_grad()
+
+    def parameter_count(self) -> int:
+        return len(self.parameters)
