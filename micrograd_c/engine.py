@@ -422,10 +422,6 @@ class Engine:
         # Extract our custom parameters before creating optimizer
         memory_efficient = optimizer_kwargs.pop('memory_efficient', False)
         mini_batch_size = optimizer_kwargs.pop('mini_batch_size', 10)
-            
-        # Extract our custom parameters before creating optimizer
-        memory_efficient = optimizer_kwargs.pop('memory_efficient', False)
-        mini_batch_size = optimizer_kwargs.pop('mini_batch_size', 10)
           # Create optimizer based on type
         if optimizer_type.lower() == 'adam':
             optimizer = Adam(model.parameters, lr=learning_rate, **optimizer_kwargs)
