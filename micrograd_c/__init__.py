@@ -1,6 +1,7 @@
 from .value import Value
 from .mlp import MLP, Layer
 from .engine import Engine, SGD, Adam, LangevinLandauOptimizer
+from .wavepacket import WavePacketLayer, WavePacketMLP
 
 __version__ = "0.0.1"
 __author__ = "Mehmet Batuhan Duman"
@@ -33,4 +34,14 @@ _initialize_constants()
 import atexit
 atexit.register(_cleanup_constants)
 
-__all__ = ["Value", "MLP", "Layer", "Engine", "SGD", "Adam", "LangevinLandauOptimizer"]
+__all__ = [
+    "Value",
+    "MLP",
+    "Layer",
+    "Engine",
+    "SGD",
+    "Adam",
+    "LangevinLandauOptimizer",
+    "WavePacketLayer",
+    "WavePacketMLP",
+]
